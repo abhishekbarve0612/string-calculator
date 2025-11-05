@@ -3,12 +3,16 @@ export type Operator = '+' | '-' | '*' | '/' | '%' | '^' | ''
 
 export function getOperandsAndOperator(input: string): [operand1: number, operand2: number, operator: Operator] {
     const trimmedInput = input.trim()
-    if (!OPERATORS.test(trimmedInput)) {
+    const isNegative = trimmedInput.startsWith('-')
+    const unsignedInput = isNegative ? trimmedInput.slice(1) : trimmedInput
+    if (!OPERATORS.test(unsignedInput)) {
         return [Number(trimmedInput), 0, '']
     }
-    const operands = trimmedInput.split(OPERATORS)
-    const operator = (trimmedInput.match(OPERATORS)?.[0] ?? '') as Operator
-    return [Number(operands[0]), Number(operands[1]), operator]
+    const operatorIndex = unsignedInput.search(OPERATORS)
+    const operator = unsignedInput[operatorIndex] as Operator
+    const operand1 = isNegative ? -Number(unsignedInput.slice(0, operatorIndex)) : Number(unsignedInput.slice(0, operatorIndex))
+    const operand2 = Number(unsignedInput.slice(operatorIndex + 1))
+    return [operand1, operand2, operator]
 }
 
 
@@ -42,3 +46,4 @@ export function calculate(input: string): number {
 
     return Number(trimmedInput)
 }
+

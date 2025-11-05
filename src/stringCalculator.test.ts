@@ -10,6 +10,17 @@ describe('getOperandsAndOperator helper function', () => {
         expect(getOperandsAndOperator('1%2')).toEqual([1, 2, '%'])
         expect(getOperandsAndOperator('1^2')).toEqual([1, 2, '^'])
     })
+
+    it('handles signed operands', () => {
+        expect(getOperandsAndOperator('-1')).toEqual([-1, 0, ''])
+        expect(getOperandsAndOperator('-1+2')).toEqual([-1, 2, '+'])
+        expect(getOperandsAndOperator('1+-2')).toEqual([1, -2, '+'])
+        expect(getOperandsAndOperator('1--2')).toEqual([1, -2, '-'])
+        expect(getOperandsAndOperator('1*-2')).toEqual([1, -2, '*'])
+        expect(getOperandsAndOperator('1/-2')).toEqual([1, -2, '/'])
+        expect(getOperandsAndOperator('1%2')).toEqual([1, 2, '%'])
+        expect(getOperandsAndOperator('1^-2')).toEqual([1, -2, '^'])
+    })
 })
 
 describe('calculateNumbers helper function', () => {
@@ -35,6 +46,7 @@ describe('String Calculator', () => {
 
     it('returns calculated result if an operator is present', () => {
         expect(calculate('  1+2')).toBe(3)
+        expect(calculate('4.5+5.2')).toBe(9.7)
         expect(calculate('1-2   ')).toBe(-1)
         expect(calculate('    1*2    ')).toBe(2)
         expect(calculate('1/2')).toBe(0.5)
