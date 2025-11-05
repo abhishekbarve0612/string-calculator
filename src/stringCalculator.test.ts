@@ -21,6 +21,14 @@ describe('getOperandsAndOperator helper function', () => {
         expect(getOperandsAndOperator('1%2')).toEqual([1, 2, '%'])
         expect(getOperandsAndOperator('1^-2')).toEqual([1, -2, '^'])
     })
+
+    it('handles invalid expressions', () => {
+        expect(() => getOperandsAndOperator('1+2+')).toThrow('Invalid expression')
+        expect(() => getOperandsAndOperator('1+2+3')).toThrow('Invalid expression')
+        expect(() => getOperandsAndOperator('1+2+3+a')).toThrow('Invalid expression')
+        expect(() => getOperandsAndOperator('a+b')).toThrow('Invalid expression')
+        expect(() => getOperandsAndOperator('a+1')).toThrow('Invalid expression')
+    })
 })
 
 describe('calculateNumbers helper function', () => {
@@ -31,6 +39,7 @@ describe('calculateNumbers helper function', () => {
         expect(calculateNumbers(1, 2, '/')).toBe(0.5)
         expect(calculateNumbers(1, 2, '%')).toBe(1)
         expect(calculateNumbers(2, 3, '^')).toBe(8)
+        expect(() => calculateNumbers(3, 0, '/')).toThrow('Division by zero')
     })
 
     it('throws an error if an invalid operator is present', () => {
@@ -52,6 +61,8 @@ describe('String Calculator', () => {
         expect(calculate('1/2')).toBe(0.5)
         expect(calculate('40%7')).toBe(5)
         expect(calculate('3^2')).toBe(9)
+        expect(calculate(' -1.5 * -2 ')).toBe(3)
+        expect(calculate('.5+1.2')).toBe(1.7)
     })
 
     it('returns the number itself if it is a single number', () => {
