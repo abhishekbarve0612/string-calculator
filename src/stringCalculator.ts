@@ -37,7 +37,7 @@ export function calculate(input: string): number {
         return 0
     }
     if (OPERATORS.test(trimmedInput)) {
-        return NaN
+        return calculateNumbers(...getOperandsAndOperator(trimmedInput))
     }
 
     return Number(trimmedInput)
