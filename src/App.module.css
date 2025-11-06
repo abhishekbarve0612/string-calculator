@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 1.5rem;
   gap: 4rem;
 }
@@ -32,11 +33,12 @@
 .textarea {
   margin: 10px 0;
   color: #aaa;
+  min-height: 100px;
 }
 
 .button {
   padding: 10px;
-  background-color: #008cba;
+  background-color: #007ea7;
   color: #fff;
   border: none;
 }
@@ -51,4 +53,11 @@
 
 .result {
   color: green;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    width: 100%;
+  }
 }

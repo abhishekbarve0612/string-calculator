@@ -109,6 +109,5 @@ describe('App', () => {
         const result = screen.getByRole('status')
         expect(result).toBeInTheDocument()
         expect(result).toHaveTextContent('')
-
     })
 })

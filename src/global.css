@@ -32,3 +32,9 @@ ul {
 li {
   margin-bottom: 0.5rem;
 }
+
+button:focus,
+textarea:focus {
+  outline: 3px solid #0b5fff;
+  outline-offset: 3px;
+}
