@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import { calculate } from './stringCalculator';
 
 const App = () => {
   const [input, setInput] = useState('');
-  const [result] = useState(null);
+  const [result, setResult] = useState<string>('');
 
-  const handleCalculate = () => { };
+  const handleCalculate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const textInput = input;
+    const textStrings = textInput.split('\n');
+    const results = textStrings.map((textString: string) => calculate(textString));
+    setResult(results.join(', '));
+  };
 
   return (
     <main style={{ padding: '20px', backgroundColor: '#fff', color: '#aaa' }}>
@@ -17,7 +24,7 @@ const App = () => {
 
       <h1>String Calculator</h1>
 
-      <form aria-label='calculator form'>
+      <form aria-label='calculator form' onSubmit={handleCalculate}>
         <label htmlFor='text-input' style={{ fontSize: '20px' }}>Enter numbers</label>
 
         <textarea
@@ -42,7 +49,10 @@ const App = () => {
 
       </form>
 
-      {result !== null && <p style={{ color: 'green' }}>Result: {result}</p>}
+      <label htmlFor='result' style={{ fontSize: '20px' }}>Result</label>
+      <output id='result' role='output' aria-live='polite'>
+        {result !== null && <p style={{ color: 'green' }}>{result}</p>}
+      </output>
 
       <div role='alert'>
         <p>Make sure you enter numbers correctly!</p>
