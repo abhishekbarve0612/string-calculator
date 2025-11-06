@@ -1,0 +1,54 @@
+.main {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 4rem;
+}
+
+.image {
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.textarea {
+  margin: 10px 0;
+  color: #aaa;
+}
+
+.button {
+  padding: 10px;
+  background-color: #008cba;
+  color: #fff;
+  border: none;
+}
+
+.label {
+  font-size: 1.25rem;
+}
+
+.error {
+  color: red;
+}
+
+.result {
+  color: green;
+}
